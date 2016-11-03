@@ -1,11 +1,14 @@
-//Thu 13 Oct 2016 22:52:04 IST 
-
+// use mongodb client 
 var MongoClient = require('mongodb').MongoClient;
+// use assert module
 var assert = require('assert');
+// use mongodb client for ObjectId
 var ObjectId = require('mongodb').ObjectID;
+// create url to connect to db, already created on mongo are are GLEN_TEST (database) and mycollection (collection)
 var url = 'mongodb://localhost:27017/GLEN_TEST';
 
 
+// 
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     console.log("Connected correctly to server.");
@@ -14,7 +17,7 @@ MongoClient.connect(url, function(err, db) {
 });
 
 
-//create users
+//create users to insert to mycollection
 var user = { "name": "sean", "id": 118, "height": 185, "eye_col": "yellow" }
 var user2 = { "name": "julie", "id": 117, "height": 158, "eye_col": "blue" }
 var user3 = { "name": "fred", "id": 11233, "height": 160, "eye_col": "white" }
