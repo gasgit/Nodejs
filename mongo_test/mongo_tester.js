@@ -38,7 +38,7 @@ var insertDocuments = function(db, callback) {
             callback(result);
         });
     }
-    // 
+// create connection and call insertDocuments function
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     insertDocuments(db, function() {
@@ -64,7 +64,7 @@ var findDocuments = function(db, callback) {
             callback(docs);
         });
     }
-    // open connection and call findDocuments
+// open connection and call findDocuments
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     findDocuments(db, function() {
@@ -91,7 +91,7 @@ var findDocumentsFilter = function(db, callback) {
             callback(docs);
         });
     }
-    // open connection and call findDocumentsFilter
+// open connection and call findDocumentsFilter
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     findDocumentsFilter(db, function() {
