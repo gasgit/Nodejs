@@ -43,9 +43,24 @@ app.get('/api/allDocuments', function(req, res) {
 
 app.get('/api/insertDocs', function(req, res) {
 
-    var user = { "name": "bean", "id": 118, "height": 185, "eye_col": "green" }
-    var user2 = { "name": "walters", "id": 117, "height": 158, "eye_col": "black" }
-    var user3 = { "name": "astair", "id": 11233, "height": 160, "eye_col": "orange" }
+    var user = {
+        "name": "bean",
+        "id": 118,
+        "height": 185,
+        "eye_col": "green"
+    }
+    var user2 = {
+        "name": "walters",
+        "id": 117,
+        "height": 158,
+        "eye_col": "black"
+    }
+    var user3 = {
+        "name": "astair",
+        "id": 11233,
+        "height": 160,
+        "eye_col": "orange"
+    }
 
     // create insertDocuments function and callback
     var insertDocuments = function(db, callback) {
@@ -58,9 +73,9 @@ app.get('/api/insertDocs', function(req, res) {
                 assert.equal(err, null);
                 assert.equal(3, result.result.n);
                 assert.equal(3, result.ops.length);
-                console.log("Inserted 3 documents into the collection");
+                console.log("Inserted 3 documents mycollection");
                 callback(result);
-                res.send("Inserted 3 documents into the collection");
+                res.send("Inserted 3 documents mycollection");
 
             });
         }
@@ -74,11 +89,16 @@ app.get('/api/insertDocs', function(req, res) {
 
 });
 
-app.get('/api/findFilter', function(req, res) {
+app.get('/api/findFilter/:id_value', function(req, res) {
+
+    var id_value = req.params.id_value
+    console.log(typeof(id_value))
 
     var findFilter = function(db, callback) {
         var collection = db.collection('mycollection');
-        collection.find({ "id": { $gt: 100 } }).toArray(function(err, result) {
+        collection.find({
+            "id": { $gt: parseInt(id_value) }
+        }).toArray(function(err, result) {
             assert.equal(err, null);
             callback(result);
             res.send(result);
@@ -93,13 +113,49 @@ app.get('/api/findFilter', function(req, res) {
     });
 });
 
+app.get('/api/delete/:name_value', function(req, res) {
+
+    var name_value = req.params.name_value
+    console.log(name_value);
+
+    var removeDocument = function(db, callback) {
+        var collection = db.collection('mycollection');
+        // delete one documents using params
+        collection.deleteOne({
+            "name": name_value
+        }, function(err, result) {
+            assert.equal(err, null);
+            assert.equal(1, result.result.n);
+            console.log("Removed the document  " + name_value);
+            callback(result);
+            //res.send(result)
+            res.send("Removed the document  " + name_value);
+
+        });
+    }
+
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        removeDocument(db, function() {
+            db.close();
+        });
+    });
+
+});
+
+
+
 app.get('/api/update', function(req, res) {
 
 });
 
-app.get('/api/delete', function(req, res) {
 
-});
+
+
+
+
+
+
 
 console.log("Server running on 127.0.0.1:8000");
 var server = app.listen(8000);
