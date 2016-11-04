@@ -11,6 +11,9 @@ var ObjectId = require('mongodb').ObjectID;
 // create url to connect to db, already created on mongo are are GLEN_TEST (database) and mycollection (collection)
 var url = 'mongodb://localhost:27017/GLEN_TEST';
 
+// pretty print
+app.set('json spaces', 4);
+
 // default route testing display browser and console
 app.get('/', function(req, res) {
     console.log("Hello World from Node And Express :)");
@@ -49,7 +52,15 @@ app.get('/api/addSingleDoc/:name/:id/:height/:eye_col', function(req, res) {
     var height = req.params.height
     var eye_col = req.params.eye_col
 
-    var doc = { "name": name, "id": id, "height": height, "eye_col": eye_col }
+    //var doc = { "name": name, "id": id, "height": height, "eye_col": eye_col }
+    var doc = {
+        "name": name,
+        "id": id,
+        "height": height,
+        "eye_col": eye_col,
+        "EMBEDDED_DOC": { "name": name, "id": id, "height": height, "eye_col": eye_col }
+    }
+
     console.log(doc)
 
     //create insertSingle from params
@@ -61,7 +72,8 @@ app.get('/api/addSingleDoc/:name/:id/:height/:eye_col', function(req, res) {
                 assert.equal(err, null);
                 console.log("Inserted 1 document mycollection");
                 callback(result);
-                res.send("Inserted  documents mycollection");
+                //res.send("Inserted  documents mycollection");
+                res.json(doc)
 
             });
         }
@@ -180,20 +192,9 @@ app.get('/api/delete/:name_value', function(req, res) {
 });
 
 
-
-
-
-
 app.get('/api/update', function(req, res) {
 
 });
-
-
-
-
-
-
-
 
 
 console.log("Server running on 127.0.0.1:8000");
