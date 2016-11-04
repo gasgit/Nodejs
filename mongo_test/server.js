@@ -25,6 +25,7 @@ app.get('/api/allDocuments', function(req, res) {
             var collection = db.collection('mycollection');
             // find some documents and store in an array
             collection.find({}).toArray(function(err, docs) {
+                assert.equal(err, null);
                 console.log(docs);
                 callback(docs);
                 res.send(docs);
@@ -70,6 +71,33 @@ app.get('/api/insertDocs', function(req, res) {
             db.close();
         });
     });
+
+});
+
+app.get('/api/findFilter', function(req, res) {
+
+    var findFilter = function(db, callback) {
+        var collection = db.collection('mycollection');
+        collection.find({ "id": { $gt: 100 } }).toArray(function(err, result) {
+            assert.equal(err, null);
+            callback(result);
+            res.send(result);
+        });
+    }
+
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        findFilter(db, function() {
+            db.close();
+        });
+    });
+});
+
+app.get('/api/update', function(req, res) {
+
+});
+
+app.get('/api/delete', function(req, res) {
 
 });
 
