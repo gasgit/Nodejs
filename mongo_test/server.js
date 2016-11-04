@@ -41,6 +41,42 @@ app.get('/api/allDocuments', function(req, res) {
 
 });
 
+// insert single document (insert)
+app.get('/api/addSingleDoc/:name/:id/:height/:eye_col', function(req, res) {
+
+    var name = req.params.name
+    var id = req.params.id
+    var height = req.params.height
+    var eye_col = req.params.eye_col
+
+    var doc = { "name": name, "id": id, "height": height, "eye_col": eye_col }
+    console.log(doc)
+
+    //create insertSingle from params
+    var insertSingle = function(db, callback) {
+            // get the documents collection
+            var collection = db.collection('mycollection');
+            // insert single doc 
+            collection.insert(doc, function(err, result) {
+                assert.equal(err, null);
+                console.log("Inserted 1 document mycollection");
+                callback(result);
+                res.send("Inserted  documents mycollection");
+
+            });
+        }
+        // 
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        insertSingle(db, function() {
+            db.close();
+        });
+    });
+
+});
+
+
+// insert multiple documents (insertMany)
 app.get('/api/insertDocs', function(req, res) {
 
     var user = {
@@ -142,6 +178,9 @@ app.get('/api/delete/:name_value', function(req, res) {
     });
 
 });
+
+
+
 
 
 
