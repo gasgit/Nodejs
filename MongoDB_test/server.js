@@ -137,6 +137,7 @@ app.get('/api/insertDocs', function(req, res) {
 
 });
 
+// find filter on id_value, ($gt) greater than
 app.get('/api/findFilter/:id_value', function(req, res) {
 
     var id_value = req.params.id_value
@@ -144,8 +145,10 @@ app.get('/api/findFilter/:id_value', function(req, res) {
 
     var findFilter = function(db, callback) {
         var collection = db.collection('mycollection');
+
         collection.find({
             "id": { $gt: parseInt(id_value) }
+
         }).toArray(function(err, result) {
             assert.equal(err, null);
             callback(result);
