@@ -18,6 +18,4 @@ db.each("SELECT * FROM people", function(err, row) {
     console.log(row);
 });
 
-
-
 db.close();
