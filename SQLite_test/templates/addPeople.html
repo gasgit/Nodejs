@@ -1,0 +1,61 @@
+<html>
+
+<head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="container">
+
+
+        <form action="/api/create_post" method="POST">
+            <h3>People Information</h3>
+
+            <div class="form-group">
+                <label for="id">ID</label>
+                <br>
+                <input type="text" name="id" id="id" required="true" />
+                <br>
+            </div>
+
+            <div class="form-group">
+
+                <label for="name">Name</label>
+                <br>
+                <input type="text" name="name" id="name" required="true" />
+                </br>
+
+            </div>
+
+            <div class="form-group">
+                <label for="age">Height</label>
+                <br>
+                <input type="text" name="height" required="true" />
+                <br>
+            </div>
+            <div class="form-group">
+                <label for="email">Eye Colour</label>
+                <br>
+                <input type="text" name="eye_col" required="true" />
+                <br>
+            </div>
+
+            <input type="submit" value="submit" />
+            <br>
+        </form>
+
+    </div>
+</body>
+
+</html>
