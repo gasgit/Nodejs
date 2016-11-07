@@ -1,9 +1,7 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Navigation</title>
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -12,19 +10,31 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 </head>
 
 <body>
 
     <div class="container">
 
-        <br>
-        <br>
+        <h2><a href="/api/menu">Menu</a></h2>
 
-        <h2><a href="/api/createPeople">Create New</a></h2>
-        <h2><a href="/api/showPeople">List</a></h2>
-        <h2><a href="/api/deletePeople">Delete</a></h2>
-        <!--<h2><a href="/update">Update</a></h2>-->
+
+
+        <form action="/api/process_delete" method="POST">
+            <h3>People Information</h3>
+
+            <div class="form-group">
+                <label for="id">Enter ID</label>
+                <br>
+                <input type="text" name="id" id="id" required="true" />
+                <br>
+            </div>
+
+            <input type="submit" value="submit" />
+            <br>
+        </form>
 
     </div>
 </body>
