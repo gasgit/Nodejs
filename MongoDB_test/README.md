@@ -1,4 +1,4 @@
-### Explore MongoDB
+# MongoDB
 * create db
 * create collection
 * insert document

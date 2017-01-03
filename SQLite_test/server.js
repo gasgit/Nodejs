@@ -59,10 +59,7 @@ app.get('/api/showPeople', function(req, res) {
     //db.close();
     console.log(db_details)
 });
-// route to update table
-app.get('/api/updatePeople', function(req, res) {
-    res.send("update!!")
-});
+
 
 app.get('/api/deletePeople', function(req, res) {
 
@@ -79,6 +76,11 @@ app.post('/api/process_delete', urlencodedParser, function(req, res) {
     res.end(res)
 
 })
+
+// route to update table
+app.get('/api/updatePeople', function(req, res) {
+    res.send("update!!")
+});
 
 
 
